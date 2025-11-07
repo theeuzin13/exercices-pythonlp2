@@ -1,0 +1,7 @@
+a - Polimorfismo significa algo que tem muitas formas, na programação orientada a objetos, ele permite que objetos de classes diferentes
+respondam ao mesmo método de maneiras distintas.
+
+b- O tipo de polimorfismo utilizado nos exercícios é o polimorfismo de sobrescrita de métodos.
+Ele permite que métodos com o mesmo nome tenham implementações diferentes em subclasses distintas.
+
+c - A função calcula_progressao() é polimorfica porque aceita diferentes tipos de argumentos sem se importar com o tipo.

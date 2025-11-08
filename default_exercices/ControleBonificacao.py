@@ -1,4 +1,5 @@
-From Funcionario import Funcionario, Gerente
+From Funcionario
+
 
 class ControleBonificacao:
 

@@ -18,7 +18,7 @@ if __name__ == '__main__':
 
 
         data = date(2000, 7, 13)
-        contato = Contato('Matheus', '35998967579', 'matt.henrique13700@gmail.com', data)
+        contato = Contato('Felipe', '0000000000', 'matt.henrique0@gmail.com', data, 3)
 
         contatoSalvo = dao.salvar(contato)
         print(contatoSalvo)

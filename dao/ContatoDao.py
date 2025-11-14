@@ -4,6 +4,7 @@ SQL_SELECT_CONTATOS = 'SELECT * FROM contato;'
 SQL_SELECT_CONTATOS_ID = 'SELECT * FROM contato WHERE id_contato = %s'
 SQL_INSERT_CONTATO = 'INSERT INTO contato (nome_contato, cel_contato, email_contato, data_nasc_contato) VALUES(%s, %s, %s, %s)'
 SQL_UPDATE_CONTATO = 'UPDATE contato SET nome_contato=%s, cel_contato=%s, email_contato=%s, data_nasc_contato=%s WHERE id_contato=%s'
+SQL_DELETE_CONTATO = 'DELETE FROM contato Where id_contato = %s'
 
 class ContadoDao:
 
@@ -52,3 +53,11 @@ class ContadoDao:
     def __traduz_contato(self, tupla):
         cont = Contato(tupla[1], tupla[2], tupla[3], tupla[4], tupla[0])
         return cont
+
+    def deletar(self, id):
+        cursor = self.__conn.cursor()
+        cursor.execute(SQL_DELETE_CONTATO, (id,))
+        self.__conn.commit()
+        print(f'Contado com id {id} deletado com sucesso.')
+
+

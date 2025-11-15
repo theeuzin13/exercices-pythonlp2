@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Minha App</title>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>{{ title }}</h1>
+        </div>
+
+        <form action="{{ url_for('create') }}" method="post">
+            <fieldset>
+              <div class="form-group mb-3">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" name="name" class="form-control">
+              </div>
+              <div class="form-group mb-3">
+                  <label for="phone">Phone</label>
+                  <input type="text" id="phone" name="phone" class="form-control">
+              </div>
+              <div class="form-group mb-3">
+                <label for="email">E-mail</label>
+                <input type="text" id="email" name="email" class="form-control">
+              </div>
+              <div class="form-group mb-3">
+                  <label for="date_of_birth">Date of Birth</label>
+                  <input type="date" id="date_of_birth" name="date_of_birth" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
+            </fieldset>
+        </form>
+    </div>
+</body>

@@ -1,4 +1,4 @@
-from model import Contato
+from model import Contact
 
 SQL_SELECT_CONTATOS = 'SELECT * FROM contato;'
 SQL_SELECT_CONTATOS_ID = 'SELECT * FROM contato WHERE id_contato = %s'
@@ -6,58 +6,58 @@ SQL_INSERT_CONTATO = 'INSERT INTO contato (nome_contato, cel_contato, email_cont
 SQL_UPDATE_CONTATO = 'UPDATE contato SET nome_contato=%s, cel_contato=%s, email_contato=%s, data_nasc_contato=%s WHERE id_contato=%s'
 SQL_DELETE_CONTATO = 'DELETE FROM contato Where id_contato = %s'
 
-class ContadoDao:
+class ContactDAO:
 
-    def __init__(self, conn):
-        self.__conn = conn
+    def __init__(self, db):
+        self.__db = db
 
-    def salvar(self, contato):
-        cursor = self.__conn.cursor()
+    def create(self, contact):
+        cursor = self.__db.connection.cursor()
 
-        if contato.id is None:
+        if contact.id is None:
             cursor.execute(SQL_INSERT_CONTATO,
-                   (contato.nome, contato.celular, contato.email, contato.data_nasc)
+                   (contact.name, contact.phone, contact.email, contact.date_of_birth)
             )
-            contato.id = cursor.lastrowid
+            contact.id = cursor.lastrowid
         else:
             cursor.execute(SQL_UPDATE_CONTATO,
-               (contato.nome, contato.celular, contato.email, contato.data_nasc, contato.id)
+               (contact.name, contact.phone, contact.email, contact.date_of_birth, contact.id)
            )
 
-        self.__conn.commit()
+        self.__db.connection.commit()
 
-        return contato
+        return contact
 
-    def listar(self):
-        cursor = self.__conn.cursor()
+    def find(self):
+        cursor = self.__db.connection.cursor()
         cursor.execute(SQL_SELECT_CONTATOS)
-        lista_tuplas = cursor.fetchall()
-        lista_contatos = self.__traduz_contatos(lista_tuplas)
-        return lista_contatos
+        list = cursor.fetchall()
+        contact_list = self.__translate_contacts(list)
+        return contact_list
 
-    def listar_por_id(self, id):
-        cursor = self.__conn.cursor()
+    def findOne(self, id):
+        cursor = self.__db.connection.cursor()
         cursor.execute(SQL_SELECT_CONTATOS_ID, (id,))
-        tupla = cursor.fetchone()
-        cont = self.__traduz_contato(tupla)
+        tuple = cursor.fetchone()
+        cont = self.__translate_contact(tuple)
         return cont
 
-    def __traduz_contatos(self, lista):
-        lista_contatos = []
+    def __translate_contacts(self, list):
+        contatc_list = []
 
-        for tupla in lista:
-            cont = self.__traduz_contato(tupla)
-            lista_contatos.append(cont)
-        return lista_contatos
+        for tuple in list:
+            cont = self.__translate_contact(tuple)
+            contatc_list.append(cont)
+        return contatc_list
 
-    def __traduz_contato(self, tupla):
-        cont = Contato(tupla[1], tupla[2], tupla[3], tupla[4], tupla[0])
+    def __translate_contact(self, tuple):
+        cont = Contact(tuple[1], tuple[2], tuple[3], tuple[4], tuple[0])
         return cont
 
-    def deletar(self, id):
-        cursor = self.__conn.cursor()
+    def delete(self, id):
+        cursor = self.__db.connection.cursor()
         cursor.execute(SQL_DELETE_CONTATO, (id,))
-        self.__conn.commit()
-        print(f'Contado com id {id} deletado com sucesso.')
+        self.__db.connection.commit()
+        print(f'Contact {id} was deleted successfully.')
 
 

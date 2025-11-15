@@ -39,6 +39,31 @@ def create():
     dao.create(contact)
     return redirect('/home')
 
+@app.route('/edit/<int:id>')
+def edit(id):
+    contact = dao.findOne(id)
+    render_template('edit.html', title='Edit Contact', contact=contact)
+
+    name = request.form['name']
+    phone = request.form['phone']
+    email = request.form['email']
+    date_of_birth = request.form['date_of_birth']
+
+    contact = Contact(name, phone, email, date_of_birth, id)
+    dao.create(contact)
+    return redirect('/home')
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    contact = dao.delete(id)
+    return render_template('delete.html', title='Delete Contact', contact=contact)
+
+    # name = request.form['name']
+    # phone = request.form['phone']
+    # email = request.form['email']
+    # date_of_birth = request.form['date_of_birth']
+
+
 #run application
 
 app.run(debug=True)

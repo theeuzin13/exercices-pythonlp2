@@ -1,23 +1,23 @@
 {% extends "template.html" %}
 {% block content %}
 
-    <form action="{{ url_for('create') }}" method="post">
+    <form action="{{ url_for('edit', id=contact.id) }}" method="post">
         <fieldset>
               <div class="form-group mb-3">
                   <label for="name">Name</label>
-                  <input type="text" id="name" name="name" class="form-control">
+                  <input type="text" id="name" name="name" class="form-control" value="{{ contact.name }}">
               </div>
               <div class="form-group mb-3">
                   <label for="phone">Phone</label>
-                  <input type="text" id="phone" name="phone" class="form-control">
+                  <input type="text" id="phone" name="phone" class="form-control" value="{{ contact.phone }}">
               </div>
               <div class="form-group mb-3">
                 <label for="email">E-mail</label>
-                <input type="text" id="email" name="email" class="form-control">
+                <input type="text" id="email" name="email" class="form-control" value="{{ contact.email }}">
               </div>
               <div class="form-group mb-3">
                   <label for="date_of_birth">Date of Birth</label>
-                  <input type="date" id="date_of_birth" name="date_of_birth" class="form-control">
+                  <input type="date" id="date_of_birth" name="date_of_birth" class="form-control" value="{{ contact.date_of_birth }}">
               </div>
               <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
         </fieldset>

@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request, redirect
+from flask import flash, Flask, render_template, request, redirect
 from flask_mysqldb import MySQL
 from dao.ContatoDao import ContactDAO
 from model import Contact
 
 #create app
 app = Flask(__name__)
+
+app.secret_key = 'teste'
 
 #connection db
 
@@ -42,8 +44,11 @@ def create():
 @app.route('/edit/<int:id>')
 def edit(id):
     contact = dao.findOne(id)
-    render_template('edit.html', title='Edit Contact', contact=contact)
+    return render_template('edit.html', titulo="Update Contact", contact=contact)
 
+@app.route('/update', methods=['POST',])
+def update():
+    id = request.form['id']
     name = request.form['name']
     phone = request.form['phone']
     email = request.form['email']
@@ -56,14 +61,7 @@ def edit(id):
 @app.route('/delete/<int:id>')
 def delete(id):
     contact = dao.delete(id)
-    return render_template('delete.html', title='Delete Contact', contact=contact)
-
-    # name = request.form['name']
-    # phone = request.form['phone']
-    # email = request.form['email']
-    # date_of_birth = request.form['date_of_birth']
-
-
-#run application
+    flash('Contact deleted was succesfully.')
+    return redirect('/home')
 
 app.run(debug=True)

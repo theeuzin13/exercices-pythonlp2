@@ -1,8 +1,9 @@
 {% extends "template.html" %}
 {% block content %}
 
-    <form action="{{ url_for('edit', id=contact.id) }}" method="post">
+    <form action="{{ url_for('update') }}" method="post">
         <fieldset>
+              <input type="hidden" name="id" value="{{ contact.id }}">
               <div class="form-group mb-3">
                   <label for="name">Name</label>
                   <input type="text" id="name" name="name" class="form-control" value="{{ contact.name }}">

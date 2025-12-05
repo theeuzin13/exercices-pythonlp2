@@ -1,0 +1,7 @@
+SECRET_KEY = 'ifsuldeminas'
+
+MYSQL_HOST= 'localhost'
+MYSQL_USER='root'
+MYSQL_PASSWORD='123456'
+MYSQL_DB='aula_bd'
+MYSQL_PORT=3306

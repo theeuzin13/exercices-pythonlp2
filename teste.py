@@ -1,6 +1,6 @@
 import mysql.connector
-from dao.ContatoDao import ContadoDao
-from model import Contato
+from dao.ContatoDao import ContactDAO
+from model import Contact
 
 from datetime import date
 
@@ -14,24 +14,24 @@ if __name__ == '__main__':
             database='aula_bd'
         )
 
-        dao = ContadoDao(connection)
+        dao = ContactDAO(connection)
 
 
         data = date(2000, 7, 13)
-        contato = Contato('Felipe', '0000000000', 'matt.henrique0@gmail.com', data, 3)
+        contato = Contact('Felipe', '0000000000', 'matt.henrique0@gmail.com', data, 3)
 
-        contatoSalvo = dao.salvar(contato)
+        contatoSalvo = dao.create(contato)
         print(contatoSalvo)
 
 
 
-        lista_contatos = dao.listar()
+        lista_contatos = dao.find()
         # contato = dao.listar_por_id(1)
         # print(contato.nome, contato.celular, contato.email, contato.data_nasc, contato.id)
         #
         for cont in lista_contatos:
             print(cont.nome, cont.celular, cont.email, cont.data_nasc, cont.id)
 
-        dao.deletar(6)
+        dao.delete(6)
     except Exception as e:
         print(e)

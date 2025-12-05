@@ -1,0 +1,25 @@
+{% extends "template.html" %}
+{% block content %}
+
+    <form action="{{ url_for('create') }}" method="post">
+        <fieldset>
+              <div class="form-group mb-3">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" name="name" class="form-control" placeholder="Fulano" value="{{ contact.name }}" required>
+              </div>
+              <div class="form-group mb-3">
+                  <label for="phone">Phone</label>
+                  <input type="tel" id="phone" name="phone" class="form-control" placeholder="(xx) xxxxx-xxxx" value="{{ contact.phone }}" required>
+              </div>
+              <div class="form-group mb-3">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="email@example.com" value="{{ contact.email }}" required>
+              </div>
+              <div class="form-group mb-3">
+                  <label for="date_of_birth">Date of Birth</label>
+                  <input type="date" id="date_of_birth" name="date_of_birth" class="form-control" value="{{ contact.date_of_birth }}" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
+        </fieldset>
+    </form>
+{% endblock %}
